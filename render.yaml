@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: terrarium
+    env: docker
+    buildCommand: docker build -t terrarium .
+    startCommand: docker run -p $PORT:$PORT terrarium
+    envVars:
+      - key: PORT
+        value: 8080
+    headers:
+      - path: /*
+        name: Cross-Origin-Embedder-Policy
+        value: require-corp
+      - path: /*
+        name: Cross-Origin-Opener-Policy
+        value: same-origin
+      - path: /*
+        name: Cross-Origin-Resource-Policy
+        value: cross-origin
